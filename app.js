@@ -6,6 +6,7 @@ var logger = require('morgan');
 const expressJwt = require('express-jwt')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var dogsRouter = require('./routes/dogs');
 
 const intitDb = require('./db');
 global.jwtKey = "my_secret_key"
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+app.use('/dogs', dogsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
