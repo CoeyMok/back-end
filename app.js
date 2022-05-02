@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 var dogsRouter = require('./routes/dogs');
 
 const intitDb = require('./db');
-global.jwtKey = "my_secret_key"
+global.jwtKey = "coey_jwtkey"
 global.db = intitDb();
 global.jwtExpirySeconds = 3000
 
@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-app.use('/user', usersRouter);
+app.use('/users', usersRouter);
 app.use('/dogs', dogsRouter);
 
 // catch 404 and forward to error handler

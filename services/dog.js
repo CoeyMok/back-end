@@ -45,4 +45,39 @@ const getById = (req,res) => {
       })
 }
 
-module.exports = {get,getById}
+const create = (req,res) => {
+    if(req.body.name === undefined){
+      return res.status(500).end('dog name missing')
+    }
+    
+    if(req.body.age === undefined){
+      return res.status(500).end('dog age missing')
+    }
+    
+    if(req.body.breeds === undefined){
+      return res.status(500).end('dog breeds missing')
+    }
+    
+    if(req.body.weight === undefined){
+      return res.status(500).end('dog weight missing')
+    }
+    
+    if(req.body.height === undefined){
+      return res.status(500).end('dog height missing')
+    }
+
+    try{
+      db.prepare("INSERT INTO dogs(name,age,breeds,weight,height) VALUES (?,?,?,?,?)",[
+        req.body.name,
+        req.body.age,
+        req.body.breeds,
+        req.body.weight,
+        req.body.height
+      ]).run().finalize();
+      return res.status(200).send('dog create successfully')
+    }catch(e){
+      return res.status(500).end('insert db failed')
+    }
+}
+
+module.exports = {get,getById,create}
