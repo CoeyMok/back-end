@@ -16,4 +16,8 @@ router.post('/', verifyJWT, function(req,res,next){
   return dog.create(req,res);
 });
 
+router.put('/:id', verifyJWT, function(req,res,next){
+  return dog.update(req,res);
+});
+
 module.exports = router;

@@ -80,4 +80,26 @@ const create = (req,res) => {
     }
 }
 
-module.exports = {get,getById,create}
+const update = (req,res) => {
+  if(req.params.id === undefined){
+    return res.status(500).end('id missing')
+  }
+  if(Object.keys(req.query).length){
+    let updates = [];
+    for (const key in req.body) {
+        const updateStmt = `${key} = ?`;
+        updates.push(updateStmt);
+        updateParams.push(req.body[key]);
+    }
+  }
+  try{
+    db.prepare("UPDATE dogs SET " + updates.join(' , '),[
+      updateParams
+    ]).run().finalize();
+    return res.status(200).send('dog update successfully')
+  }catch(e){
+    return res.status(500).end('update db failed')
+  }
+}
+
+module.exports = {get,getById,create,update}
