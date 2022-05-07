@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const login = (req,res) => {
     if(req.body.username === undefined || req.body.password === undefined){
-        return res.statusg(401).end('login fail')
+        return res.status(401).end('login fail')
         
     }
     const username = req.body.username;
