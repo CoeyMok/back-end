@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 
 const verifyJWT = (req, res,next)=>{
     // We can obtain the session token from the requests cookies, which come with every request
-	const token = req.cookies.token
-
+	const token = req.cookies.token || req.headers.token;
+	
 	// if the cookie is not set, return an unauthorized error
 	if (!token) {
 		return res.status(401).end('invalid token')
