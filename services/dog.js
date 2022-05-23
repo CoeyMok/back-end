@@ -46,7 +46,7 @@ const getById = (req,res) => {
 }
 
 const create = (req,res) => {
-    if(req.body.name === undefined){
+    if(req.body.name === undefined || req.body.name === ''){
       return res.status(500).end('dog name missing')
     }
     
@@ -54,7 +54,7 @@ const create = (req,res) => {
       return res.status(500).end('dog age missing')
     }
     
-    if(req.body.breeds === undefined){
+    if(req.body.breeds === undefined || req.body.breeds === ''){
       return res.status(500).end('dog breeds missing')
     }
     
